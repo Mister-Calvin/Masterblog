@@ -57,6 +57,40 @@ def delete(post_id):
 
 
 
+@app.route('/update/<int:post_id>', methods=['GET', 'POST'])
+def update(post_id):
+
+    # Fetch the blog posts from the JSON file
+    posts = load_data("blog_posts.json")
+    #load post
+    for info in posts:
+        if info['id'] == post_id:
+            post = info
+            break
+
+
+    if post is None:
+        # Post not found
+        return "Post not found", 404
+
+    if request.method == 'POST':
+    # Update the post in the JSON file
+        #get data
+        new_title = request.form.get('title')
+        new_content = request.form.get('content')
+        #overwrite old Data
+        post['title'] = new_title
+        post['content'] = new_content
+
+        with open("blog_posts.json", "w") as f:
+            json.dump(posts, f, indent=2)
+        return redirect(url_for('index'))
+
+    # Else, it's a GET request
+    # So display the update.html page
+    return render_template('update.html', post=post)
+
+
 
 
 
