@@ -84,12 +84,27 @@ def update(post_id):
 
         with open("blog_posts.json", "w") as f:
             json.dump(posts, f, indent=2)
+
         return redirect(url_for('index'))
 
     # Else, it's a GET request
     # So display the update.html page
     return render_template('update.html', post=post)
 
+
+@app.route('/likes/<int:post_id>', methods=['POST'])
+def likes(post_id):
+    posts = load_data("blog_posts.json")
+    for post in posts:
+        if post['id'] == post_id:
+            post['likes'] = post['likes'] + 1
+            break
+
+    with open("blog_posts.json", "w") as f:
+        json.dump(posts, f, indent=2)
+
+
+    return redirect(url_for('index'))
 
 
 
