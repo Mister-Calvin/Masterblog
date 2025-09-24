@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 import json
 app = Flask(__name__)
 
@@ -37,7 +37,7 @@ def add():
         with open("blog_posts.json", "w") as f:
             json.dump(posts, f, indent=2)
 
-        return redirect('/')
+        return render_template('sucess_post.html')
 
     return render_template('add.html')
 
