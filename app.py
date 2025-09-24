@@ -42,6 +42,19 @@ def add():
     return render_template('add.html')
 
 
+@app.route('/delete/<int:post_id>')
+def delete(post_id):
+    posts = load_data("blog_posts.json")
+    for post in posts:
+        if post['id'] == post_id:
+            posts.remove(post)
+            break
+
+    with open("blog_posts.json", "w") as f:
+        json.dump(posts, f, indent=2)
+
+    return render_template('delete_sucess.html')
+
 
 
 
