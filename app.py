@@ -35,11 +35,13 @@ def add():
         content = request.form.get('content')
 
 
+
         new_post = {
             "id": len(posts) + 1,
             "author": author,
             "title": title,
-            "content": content
+            "content": content,
+            "likes": 0
         }
 
         posts.append(new_post)
