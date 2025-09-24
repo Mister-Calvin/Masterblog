@@ -1,7 +1,16 @@
 [
-
-    {"id": 1, "author": "John Doe", "title": "First Post", "content": "This is my first post."},
-    {"id": 2, "author": "Jane Doe", "title": "Second Post", "content": "This is another post."},
-    {"id": 3, "author": "Calle", "title": "Third", "content": "This is another post from Calle."}
-
+  {
+    "id": 1,
+    "author": "Calvin",
+    "title": "first post",
+    "content": "Hey, Im Calvin an this is my very first Post",
+    "likes": 1
+  },
+  {
+    "id": 2,
+    "author": "Max",
+    "title": "hi calvin",
+    "content": "nice work on your new App",
+    "likes": 0
+  }
 ]
