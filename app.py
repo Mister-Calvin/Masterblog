@@ -9,6 +9,12 @@ def load_data(file_path):
     return json.load(handle)
 
 
+def overwrite_data(posts):
+    with open("blog_posts.json", "w") as f:
+        new_data = json.dump(posts, f, indent=2)
+        return new_data
+
+
 @app.route('/')
 def index():
     # add code here to fetch the job posts from a file
@@ -34,8 +40,7 @@ def add():
 
         posts.append(new_post)
 
-        with open("blog_posts.json", "w") as f:
-            json.dump(posts, f, indent=2)
+        overwrite_data(posts)
 
         return render_template('sucess_post.html')
 
@@ -50,8 +55,7 @@ def delete(post_id):
             posts.remove(post)
             break
 
-    with open("blog_posts.json", "w") as f:
-        json.dump(posts, f, indent=2)
+    overwrite_data(posts)
 
     return render_template('delete_sucess.html')
 
@@ -82,8 +86,7 @@ def update(post_id):
         post['title'] = new_title
         post['content'] = new_content
 
-        with open("blog_posts.json", "w") as f:
-            json.dump(posts, f, indent=2)
+        overwrite_data(posts)
 
         return redirect(url_for('index'))
 
@@ -100,9 +103,7 @@ def likes(post_id):
             post['likes'] = post['likes'] + 1
             break
 
-    with open("blog_posts.json", "w") as f:
-        json.dump(posts, f, indent=2)
-
+    overwrite_data(posts)
 
     return redirect(url_for('index'))
 
